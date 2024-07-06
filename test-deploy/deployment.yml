@@ -6,8 +6,15 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 80
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
     targetPort: 80
+  - name: admin
+    protocol: TCP
+    port: 7080
+    targetPort: 7080
   selector:
     app: faveocloud-pods
 ---
@@ -36,7 +43,10 @@ spec:
 #        doks.digitalocean.com/node-pool: k8s-pool-1-ray6v
       containers:
       - name: helpdesk-apache
-        image: ladybird/faveo-multi-tenant-apache2:dev.82
+        image: tamilselvanlws/faveo-k8s-ols-php8.2:v1
+        ports:
+        - containerPort: 80
+        - containerPort: 7080
         resources:
           limits:
             memory: 1024Mi

@@ -4,15 +4,15 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 
-  name: faveo-ingress
+  name: ols-ingress
   namespace: faveo
 spec:
   tls:
   - hosts:
-    - '*.thetamilselvan.in'
-    secretName: faveo-tls
+    - 'ols.thetamilselvan.in'
+    secretName: ols-tls
   rules:
-  - host: '*.thetamilselvan.in'
+  - host: 'ols.thetamilselvan.in'
     http:
       paths:
       - path: /
@@ -21,6 +21,5 @@ spec:
           service:
             name: faveocloud-svc
             port:
-              number: 80
-  
+              number: 7080
   
