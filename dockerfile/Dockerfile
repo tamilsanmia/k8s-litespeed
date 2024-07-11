@@ -8,8 +8,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Update packages and install necessary packages
 
 RUN apt-get update && apt-get -y install nano unzip wkhtmltopdf lsphp82 lsphp82 lsphp82-mysql lsphp82-common lsphp82-opcache lsphp82-intl lsphp82-curl lsphp82-imap lsphp82-ldap lsphp82-redis lsphp82-memcached &&  rm -r /var/lib/apt/lists/*
-RUN apt-get install unzip
-RUN apt-get clean
 
 # Download and install ionCube Loader
 RUN wget -O /tmp/ioncube_loaders.zip https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.zip && \
@@ -27,7 +25,9 @@ RUN sed -i -e 's/^file_uploads =.*/file_uploads = On/' \
            -e 's/^post_max_size =.*/post_max_size = 100M/' \
            -e 's/^max_execution_time =.*/max_execution_time = 360/' \
            /usr/local/lsws/lsphp82/etc/php/8.2/litespeed/php.ini
-           
+
+RUN apt-get clean
+
 # Create virtual host configuration directory
 RUN mkdir -p /usr/local/lsws/conf/vhosts/faveo
 
