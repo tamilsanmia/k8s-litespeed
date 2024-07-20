@@ -39,7 +39,7 @@ spec:
         app: faveocloud-pods
     spec:
 #      nodeSelector:
-#        doks.digitalocean.com/node-pool: k8s-pool-1-ray6v
+#        doks.digitalocean.com/node-pool: faveo-b3k3b
       containers:
       - name: helpdesk-apache
         image: tamilselvanlws/faveo-k8s-ols-php8.2:v1
@@ -77,7 +77,6 @@ spec:
       - name: fetch
         image: vishwashaxoor/fetcher
         command: ['sh','-c','apt update;apt install git -y; curl https://billing.faveohelpdesk.com/download/faveo\?order_number\=35809939\&serial_key\=F6LCG5CNGARX0000 --output faveo.zip; unzip faveo.zip -d html;chown -R www-data:www-data /html']
-#        command: ['sh','-c','apt update;apt install git -y; git clone --branch release-800 https://tamilselvan-lws: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@github.com/ladybirdweb/faveo-cloud.git html;chown -R www-data:www-data /html']
         volumeMounts:
         - name: volume-data
           mountPath: /html

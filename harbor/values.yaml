@@ -1,0 +1,15 @@
+expose:
+  type: ingress
+  controller: true
+  ingress:
+    hosts:
+      core: harbor.thetamilselvan.in
+    annotations:
+      kubernetes.io/ingress.class: lslbd
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    tls:
+      - secretName: harbor-tls
+        hosts:
+          - '*.thetamilselvan.in'
+harborAdminPassword: "Harbor12345"
+externalURL: https://harbor.thetamilselvan.in
