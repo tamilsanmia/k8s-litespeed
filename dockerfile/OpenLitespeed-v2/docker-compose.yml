@@ -1,0 +1,35 @@
+version: '3.9'  # Specify the version of Docker Compose
+
+services:
+  ubuntu:
+    image: k8s-ols:v3
+    container_name: litespeed
+    command: tail -f /dev/null  # Keeps the container running
+    ports:
+      - "80:80"    # Expose port 80
+      - "443:443"  # Expose port 443
+      - "7080:7080" # Expose port 7080
+    networks:
+      - app_network
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # Set the root password
+      MYSQL_DATABASE: faveo            # Create a default database
+      MYSQL_USER: faveo              # Create a default user
+      MYSQL_PASSWORD: strongpassword      # Set the default user's password
+    ports:
+      - "3306:3306"  # Expose the MySQL port
+    networks:
+      - app_network
+    volumes:
+      - mysql_data:/var/lib/mysql  # Persist data on the host
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
